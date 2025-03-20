@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
+
 function BookCreate({ onCreate }) {
+    const { createBook } = useContext(BooksContext);
     const [title, setTitle] = useState('');
 
     const handleChange = (event) => {
@@ -8,7 +11,7 @@ function BookCreate({ onCreate }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onCreate(title);
+        createBook(title);
         //After a title is submitted and created, set the title piece of state to an empty string so that this component rerenders and displays an empty string for the value attribute of the input element.
         setTitle('');
     }

@@ -1,22 +1,23 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import BooksContext from '../context/books';
 import BookEdit from './BookEdit';
 
-function BookShow({ book, onDelete, onEdit }) {
+function BookShow({ book }) {
+    const { deleteBookById } = useContext(BooksContext);
     const [showEdit, setShowEdit] = useState(false);
 
     const handleDeleteClick = () => {
          // The book prop already contains the id of the book object that we need to delete.
         // We can reference the id field of the book passed down through the book prop and pass this id in as an argument to the onDelete function.
-        onDelete(book.id);
+        deleteBookById(book.id);
     }
 
     const handleEditClick = () => {
         setShowEdit(!showEdit); //Toggle the value of showEdit
     }
 
-    const handleSubmit = (id, newTitle) => {
+    const handleSubmit = () => {
         setShowEdit(false);
-        onEdit(id, newTitle);
     }
 
     let content = <h3>{book.title}</h3>
