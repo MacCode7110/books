@@ -4,11 +4,11 @@ import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
 import BooksContext from './context/books';
 function App() {
-    const { fetchBooks } = useContext(BooksContext);
-    // Fetch all books from the server on first render of the application
+    const { stableFetchBooks } = useContext(BooksContext);
+    // Fetch all books from the server only after the fetchBooks piece of state changes.
     useEffect(() => {
-        fetchBooks();
-    }, []);
+        stableFetchBooks();
+    }, [stableFetchBooks]);
 
     return <div className="app">
             <h1>Reading List</h1>
